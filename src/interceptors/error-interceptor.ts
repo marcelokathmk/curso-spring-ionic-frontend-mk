@@ -9,7 +9,6 @@ import { HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, Htt
 export class ErrorInterceptor implements HttpInterceptor{
     
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
-        console.log("passou no interceptor");
         return next.handle(req)
             .catch((error, caught) => {
                 let erroObj = error;
