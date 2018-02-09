@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the SigupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,7 +9,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SigupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formGroupSignUp: FormGroup;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public formBuilder: FormBuilder) {
+
+      this.formGroupSignUp = this.formBuilder.group({
+        nome: ["Choriat Da Silva", [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+        email: ["", [Validators.required, Validators.email]],
+        tipo: ["", [Validators.required]],
+        cpfOuCnpj: ["", [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
+        senha: ["", [Validators.required]],
+        logradouro: ["", [Validators.required]],
+        numero: ["", [Validators.required]],
+        complemento: ["", []],
+        bairro: ["", []],
+        cep: ["", [Validators.required]],
+        telefone1: ["", [Validators.required]],
+        telefone2: ["", []],
+        telefone3: ["", []],
+        estadoId: [null, [Validators.required]],
+        cidadeId: [null, [Validators.required]]
+      });
   }
 
   ionViewDidLoad() {
