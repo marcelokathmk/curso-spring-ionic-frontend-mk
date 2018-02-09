@@ -39,7 +39,7 @@ export class CategoriasPage {
     );
   }
 
-  public showProdutos(){
-    this.navCtrl.push("ProdutosPage");
+  public showProdutos(categoriaId: String){
+    this.navCtrl.push("ProdutosPage", {categoria: categoriaId});
   }
 }
