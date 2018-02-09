@@ -12,12 +12,19 @@ export class ClienteService{
 
     }
 
-    findByEmail(email: String) : Observable<ClienteDTO>{
+    public findByEmail(email: String) : Observable<ClienteDTO>{
         return this.http.get<ClienteDTO>(`${API_CONFIG.base_url}/clientes/email?value=${email}`);
     }
 
-    getImageFromBucket(id: String) : Observable<any> {
+    public getImageFromBucket(id: String) : Observable<any> {
         let url = `${API_CONFIG.bucket_base_url}/cp${id}.jpg`;
         return this.http.get(url, {responseType : 'blob'});
+    }
+
+    public insert(obj: ClienteDTO){
+        return this.http.post(`${API_CONFIG.base_url}/clientes`, obj, {
+            observe: "response",
+            responseType: "text"
+        });
     }
 }

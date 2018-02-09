@@ -5,6 +5,8 @@ import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
+import { ClienteService } from '../../services/domain/cliente.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 @IonicPage()
 @Component({
@@ -22,7 +24,9 @@ export class SigupPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public cidadeService: CidadeService,
-    public estadoService: EstadoService) {
+    public estadoService: EstadoService,
+    public clienteService: ClienteService,
+    public alert: AlertController) {
 
       this.formGroupSignUp = this.formBuilder.group({
         nome: ["Choriat Da Silva", [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -62,7 +66,27 @@ export class SigupPage {
   }
 
   public signupUser(){
-    console.log("enviou o form");
+    console.log(this.formGroupSignUp.value);
+    this.clienteService.insert(this.formGroupSignUp.value).subscribe(response => {
+      this.showInsertOk();
+    },
+    error => {});
   }
 
+  public showInsertOk(){
+    let alert = this.alert.create({
+      title: "Sucesso!",
+      message: "Cadastro efetuado com sucesso",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Ok",
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }
