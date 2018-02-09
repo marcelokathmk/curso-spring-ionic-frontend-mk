@@ -5,11 +5,12 @@ import { HttpHandler } from "@angular/common/http/src/backend";
 import { Observable } from "rxjs/Rx";
 import { HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent } from "@angular/common/http";
 import { StorageService } from "../services/storage.service";
+import { AlertController } from "ionic-angular/components/alert/alert-controller";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor{
     
-    constructor(public storage: StorageService){
+    constructor(public storage: StorageService, public alertController: AlertController){
 
     }
 
@@ -28,8 +29,16 @@ export class ErrorInterceptor implements HttpInterceptor{
                 console.log(erroObj);
 
                 switch(erroObj.status){
+                    case 401:
+                    this.handle401();
+                    break;
+                    
                     case 403:
                     this.handle403();
+                    break;
+
+                    default:
+                    this.handleDefaultError(erroObj);
                     break;
                 }
 
@@ -39,6 +48,34 @@ export class ErrorInterceptor implements HttpInterceptor{
 
     handle403(){
         this.storage.setLocalUser(null);
+    }
+
+    handle401(){
+        let alert = this.alertController.create({
+            title: "Erro 401: Falha de Autenticação",
+            message: "Email ou Senha incorretos",
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: "Ok"
+                }
+            ] 
+        });
+        alert.present();
+    }
+
+    handleDefaultError(erroObj){
+        let alert = this.alertController.create({
+            title: "Erro "+ erroObj.status +": "+ erroObj.error,
+            message: erroObj.message,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: "Ok"
+                }
+            ] 
+        });
+        alert.present();
     }
 }
 
