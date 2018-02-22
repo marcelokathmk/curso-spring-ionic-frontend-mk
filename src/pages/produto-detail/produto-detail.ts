@@ -19,7 +19,7 @@ export class ProdutoDetailPage {
       public produtoService: ProdutoService) {
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
       let produtoId = this.navParams.get("produtoId")
       this.produtoService.findById(produtoId).subscribe(response => {
         this.item = response;

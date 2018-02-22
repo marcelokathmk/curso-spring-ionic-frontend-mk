@@ -28,14 +28,12 @@ export class CategoriasPage {
     public categoriaService: CategoriaService) {
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     this.categoriaService.findAll().subscribe(
       response => {
         this.items = response;
       },
-      error => {
-        
-      }
+      error => {}
     );
   }
 

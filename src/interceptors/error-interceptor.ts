@@ -15,7 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor{
 
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
         return next.handle(req)
             .catch((error, caught) => {
                 let erroObj = error;
@@ -65,11 +65,11 @@ export class ErrorInterceptor implements HttpInterceptor{
         alert.present();
     }
 
-    handle403(){
+    public handle403(){
         this.storage.setLocalUser(null);
     }
 
-    handle401(){
+    public handle401(){
         let alert = this.alertController.create({
             title: "Erro 401: Falha de Autenticação",
             message: "Email ou Senha incorretos",
@@ -83,7 +83,7 @@ export class ErrorInterceptor implements HttpInterceptor{
         alert.present();
     }
 
-    handleDefaultError(erroObj){
+    public handleDefaultError(erroObj){
         let alert = this.alertController.create({
             title: "Erro "+ erroObj.status +": "+ erroObj.error,
             message: erroObj.message,

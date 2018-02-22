@@ -5,7 +5,7 @@ import { STORAGE_KEYS } from "../config/storage-keys.config";
 @Injectable()
 export class StorageService{
     
-    getLocalUser() : LocalUser {
+    public getLocalUser() : LocalUser {
         let user = localStorage.getItem(STORAGE_KEYS.localUser);
         if  (user == null){
             return null;
@@ -13,7 +13,7 @@ export class StorageService{
         return JSON.parse(user);
     }
 
-    setLocalUser(obj : LocalUser) {
+    public setLocalUser(obj : LocalUser) {
         if  (obj == null){
             localStorage.removeItem(STORAGE_KEYS.localUser);
         }else{

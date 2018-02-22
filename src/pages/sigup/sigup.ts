@@ -47,7 +47,7 @@ export class SigupPage {
       });
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     this.estadoService.findAll().subscribe(response =>{
       this.estados = response;
       this.formGroupSignUp.controls.estadoId.setValue(this.estados[0].id);

@@ -28,7 +28,7 @@ export class ProfilePage {
     public clienteService: ClienteService) {
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
     if  (localUser && localUser.email){
         this.clienteService.findByEmail(localUser.email).subscribe(response => {
@@ -45,7 +45,7 @@ export class ProfilePage {
     }
   }
 
-  getImageIfExists(){
+  public getImageIfExists(){
     this.clienteService.getImageFromBucket(this.cliente.id).subscribe(response => {
       this.cliente.imageUrl = `${API_CONFIG.bucket_base_url}/cp${this.cliente.id}.jpg`;
     },

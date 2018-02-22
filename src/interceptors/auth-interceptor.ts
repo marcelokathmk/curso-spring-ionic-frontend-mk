@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor{
 
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
         let localUser = this.storage.getLocalUser();
         let n = API_CONFIG.base_url.length;
         let requestToAPI = req.url.substring(0, n) == API_CONFIG.base_url;
