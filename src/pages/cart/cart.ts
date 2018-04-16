@@ -4,6 +4,7 @@ import { CartItem } from '../../models/cart-items';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
 import { CartService } from '../../services/domain/cart.service';
+import { ProdutoDTO } from '../../models/produto.dto';
 
 /**
  * Generated class for the CartPage page.
@@ -42,5 +43,25 @@ export class CartPage {
         },
         error => {});
       }
+  }
+
+  public removeItem(produto: ProdutoDTO){
+    this.items = this.cartService.removeProduct(produto).itens;
+  }
+
+  public increaseQuantity(produto: ProdutoDTO){
+    this.items = this.cartService.increaseQuantity(produto).itens;
+  }
+
+  public decreaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.decreaseQuantity(produto).itens;
+  }
+
+  public getTotal(): number{
+    return this.cartService.total();    
+  }
+
+  public goOn(){
+    this.navCtrl.setRoot('CategoriasPage');
   }
 }
