@@ -8,12 +8,13 @@ import { StorageService } from "../storage.service";
 @Injectable()
 export class ClienteService{
 
-    constructor(public http: HttpClient, public storage: StorageService){
-
+    constructor(
+        public http: HttpClient, 
+        public storage: StorageService){
     }
 
-    public findByEmail(email: String) : Observable<ClienteDTO>{
-        return this.http.get<ClienteDTO>(`${API_CONFIG.base_url}/clientes/email?value=${email}`);
+    public findByEmail(email: String) {
+        return this.http.get(`${API_CONFIG.base_url}/clientes/email?value=${email}`);
     }
 
     public getImageFromBucket(id: String) : Observable<any> {
