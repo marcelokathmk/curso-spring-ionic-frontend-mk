@@ -21,7 +21,6 @@ export class MyApp {
     public authService: AuthService) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: "Profile", component: "ProfilePage" },
       { title: "Categorias", component: "CategoriasPage" },
@@ -33,8 +32,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
