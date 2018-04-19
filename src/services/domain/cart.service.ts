@@ -1,7 +1,6 @@
 import { StorageService } from "../storage.service";
 import { Injectable } from "@angular/core";
 import { Cart } from "../../models/cart";
-import { nullSafeIsEquivalent } from "@angular/compiler/src/output/output_ast";
 import { ProdutoDTO } from "../../models/produto.dto";
 
 @Injectable()
